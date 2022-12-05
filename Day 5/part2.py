@@ -2,17 +2,7 @@ f = open("Day 5\input.txt", "r")
 
 lines = f.readlines()
 
-table = [
-    ["F", "T", "C", "L", "R", "P", "G", "Q"],
-    ["N", "Q", "H", "W", "R", "F", "S", "J"],
-    ["F", "B", "H", "W", "P", "M", "Q"],
-    ["V", "S", "T", "D", "F"],
-    ["Q", "L", "D", "W", "V", "F", "Z"],
-    ["Z", "C", "L", "S"],
-    ["Z", "B", "M", "V", "D", "F"],
-    ["T", "J", "B"],
-    ["Q", "N", "B", "G", "L", "S", "P", "H"]
-]
+table = []
 
 for line in lines:
     if "move" in line:
@@ -24,8 +14,31 @@ for line in lines:
 
         table[to] += table[source][-count:]
         del table[source][-count:]
+    elif "[" in line:
+        row = line.split(" ")
 
+        spaceCounter = 0
         
+        tableRow = []
+
+        for col in row:
+            if col == "" or col == "\n":
+                spaceCounter += 1
+
+                if spaceCounter == 4:
+                    spaceCounter = 0
+                    tableRow.append(" ")
+            elif "[" in col:
+                spaceCounter = 0
+                tableRow.append(col[1])
+
+        if len(table) == 0:
+            table = [[] if i == " " else [i] for i in tableRow]
+        else:
+            for i in range(len(tableRow)):
+                if tableRow[i] != " ":
+                    table[i].insert(0, tableRow[i])
+
 finalWord = ""
 
 for c in table:
