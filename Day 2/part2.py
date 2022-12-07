@@ -1,22 +1,4 @@
-'''
-A is rock
-B is paper 
-C is scissors
-
-X is rock
-Y is paper 
-Z is scissor
-
-1 for rock 
-2 for paper
-3 for scissors
-
-0 for losing
-3 for draw
-6 for win
-'''
-
-f = open("Day 2\input.txt", "r")
+f = open("Day 2/input.txt", "r")
 
 lines = f.readlines()
 
